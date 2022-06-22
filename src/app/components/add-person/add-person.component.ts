@@ -142,6 +142,7 @@ export class AddPersonComponent implements OnInit {
         // Validators.minLength(6),
         // Validators.maxLength(20)
       ]],
+      id:[id],
       address: ['', [
         Validators.required,
         // Validators.minLength(6),
@@ -178,7 +179,7 @@ export class AddPersonComponent implements OnInit {
     });
   }
 
-  // generateUniqueId() {
+  // let dd = generateUniqueId() {
   //   return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
   // }
 

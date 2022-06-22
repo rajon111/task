@@ -98,6 +98,7 @@ export class EditPersonComponent implements OnInit {
   }
 
   onSubmit() {
+    debugger;
     console.log('value: ', this.myForm.value);
     console.log('valid: ', this.myForm.valid);
     this.submitted = true;
@@ -107,6 +108,7 @@ export class EditPersonComponent implements OnInit {
     }
     const data = { ...this.myForm.value }
     data.id=this.id;
+    debugger;
     this.personServide.editPerson(data);
     this.router.navigate(['/persons/admin']);
 

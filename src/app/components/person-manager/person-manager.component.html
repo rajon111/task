@@ -21,11 +21,14 @@
                           
                           <th scope="col">Name</th>
                           <th scope="col">Address</th>
-                          <th scope="col">Phone Number</th>
+                          <th scope="col">Phone</th>
                           <th scope="col">Email</th>
-                          <th scope="col">Edit</th>
-                          <th scope="col">Delete</th>
+                          <th scope="col">From</th>
+                          <th scope="col">To</th>
                           <th scope="col" >Qalification</th>
+                          <th scope="col">Delete</th>
+                          <th scope="col">Edit</th>
+                          
                         </tr>
                       </thead>
                       <tbody>
@@ -34,8 +37,10 @@
                           <td>{{person?.name}}</td>
                           <td>{{person?.address}}</td>
                           <td>{{person?.phoneNumber}}</td>
-                          <td>{{person?.email}}</td>
-                          <td *ngFor="let data of person?.educationaInfo"></td>
+                          <td>{{person?.phoneNumber}}</td>
+                          <td *ngFor="let data of person?.educationaInfo">{{data?.from? data?.from: ''}}</td>
+                          <td *ngFor="let data of person?.educationaInfo">{{data?.to}}</td>
+                          <td *ngFor="let data of person?.educationaInfo">{{data?.qualification}}</td>
                           <!-- <td >{{person?.educationalQualifications[0]?.from}}</td> -->
                           <td><a class="btn btn-primary" [routerLink]="['/persons/edit', person.id]" >Edit</a></td>
                           <td><span class="btn btn-danger" (click)="onDelete(person?.id)">Delete</span></td>
@@ -52,11 +57,11 @@
                     <a class="btn btn-danger" [routerLink]="['/persons/edit', person.id]" >Edit</a>
                     <span class="btn btn-danger" (click)="onDelete(person?.id)">Delete</span>
                 </li> -->
-                <!-- <ng-container *ngIf="!allPersons">
+                <ng-container *ngIf="!allPersons">
                     <div>
                         There is no persons data available
                     </div>
-                </ng-container> -->
+                </ng-container>
                 
             </div>
             
