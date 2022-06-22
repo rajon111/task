@@ -4,7 +4,7 @@
             <p class="h3 text-danger fw-bold">Persons
                 <a class="btn btn-danger btn-sm" routerLink="/persons/add">add new</a>
             </p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi provident explicabo nihil accusamus ad tempora praesentium labore ut culpa quam ex minus quos, impedit voluptate modi, nam, deleniti sint non.</p>
+            <p>Wlecome to your TO-DO list. You can Store Your Needed Persons Recordes Accordingly.Also You can Update or delete Your Data .</p>
         </div>    
     </div>
 </nav>
@@ -37,7 +37,7 @@
                           <td>{{person?.name}}</td>
                           <td>{{person?.address}}</td>
                           <td>{{person?.phoneNumber}}</td>
-                          <td>{{person?.phoneNumber}}</td>
+                          <td>{{person?.email}}</td>
                           <td *ngFor="let data of person?.educationaInfo">{{data?.from? data?.from: ''}}</td>
                           <td *ngFor="let data of person?.educationaInfo">{{data?.to}}</td>
                           <td *ngFor="let data of person?.educationaInfo">{{data?.qualification}}</td>

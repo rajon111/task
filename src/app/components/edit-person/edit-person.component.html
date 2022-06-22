@@ -17,6 +17,7 @@
           </div> -->
             </div>
         </div>
+        
 
         <div class="form-group">
             <label>Email</label>
@@ -46,19 +47,20 @@
 
         <button (click)="addGroup()">Add</button>
         <br>
+        <p>Edit qualification</p>
 
         <div formArrayName="educationaInfo" *ngFor="let time of this.fa?.controls; let i = index;">
             <div [formGroupName]="i">
                 
                 <select formControlName="qualification">
                     <option [value]="'SSC'">SSC</option>
-                    <option  [value]="'SSC'">HSC</option>
-                    <option  [value]="'SSC'">BSC</option>
-                    <option  [value]="'SSC'">MSC</option>
+                    <option  [value]="'HSC'">HSC</option>
+                    <option  [value]="'BSC'">BSC</option>
+                    <option  [value]="'MSC'">MSC</option>
                 </select>
 
-                <input placeholder="institute" formControlName="institute">
-                <input placeholder="institute"  formControlName="grade">
+                <input placeholder="institute" type="text" formControlName="institute">
+                <input placeholder="grade" type="number" formControlName="grade">
                 <input placeholder="from" type="date" formControlName="from">
                 <input placeholder="to" type="date" formControlName="to">
             </div>
@@ -69,7 +71,7 @@
 
 
         <div class="form-group">
-            <button type="submit" class="btn btn-primary">Register</button>
+            <button type="submit" class="btn btn-primary">Submit</button>
             <button type="button" class="btn btn-warning float-right">
                 Reset
             </button>
@@ -81,7 +83,7 @@
 
 
 <div>
-    <pre>
+    <!-- <pre>
                 {{myForm.value | json}}
-                </pre>
+                </pre> -->
 </div>

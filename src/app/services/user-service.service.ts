@@ -30,7 +30,7 @@ export class PersonServiceService {
   }
 
   editPerson(person: Person) {
-    debugger;
+    // debugger;
     const filteredPerson = this.persons.filter((data: Person) => person.id === data.id)[0];
     const index = this.persons.indexOf(filteredPerson);
     if (index > -1) {

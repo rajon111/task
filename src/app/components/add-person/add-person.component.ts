@@ -202,8 +202,8 @@ export class AddPersonComponent implements OnInit {
         return;
       }
       const dataP=this.myForm.value;
-      const sentDat={id,...dataP}
-      this.personServide.addPerson(sentDat);
+      // const sentDat={id}
+      this.personServide.addPerson(this.myForm.value);
       this.router.navigate(['/persons/admin']);
 
       

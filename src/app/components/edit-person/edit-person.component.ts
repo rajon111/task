@@ -45,10 +45,16 @@ export class EditPersonComponent implements OnInit {
 
   createEditForm() {
     const form = this.fb.group({
-
+      id:[this.person?.id??''],
       name: [this.person?.name ?? '', [
         Validators.required,
       ]],
+      // address: [
+      //   this.person?.address ?? '',
+      //   [
+      //     Validators.required
+      //   ]
+      // ],
       phoneNumber: [
         this.person?.phoneNumber ?? '',
         [
@@ -99,17 +105,21 @@ export class EditPersonComponent implements OnInit {
 
   onSubmit() {
     debugger;
-    console.log('value: ', this.myForm.value);
-    console.log('valid: ', this.myForm.valid);
+    
     this.submitted = true;
 
     if (this.myForm.invalid) {
       return;
     }
     const data = { ...this.myForm.value }
+    console.log("data",data);
+    
     data.id=this.id;
     debugger;
-    this.personServide.editPerson(data);
+    console.log('value: ', this.myForm.value);
+    console.log('valid: ', this.myForm.valid);
+
+    this.personServide.editPerson(this.myForm.value);
     this.router.navigate(['/persons/admin']);
 
 
@@ -117,5 +127,7 @@ export class EditPersonComponent implements OnInit {
   get f(): { [key: string]: AbstractControl } {
     return this.myForm.controls;
   }
+
+
 
 }
