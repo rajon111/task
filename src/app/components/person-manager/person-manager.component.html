@@ -1,0 +1,88 @@
+<nav class="container mt-3 ">
+    <div class="row">
+        <div class="col">
+            <p class="h3 text-danger fw-bold">Persons
+                <a class="btn btn-danger btn-sm" routerLink="/persons/add">add new</a>
+            </p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi provident explicabo nihil accusamus ad tempora praesentium labore ut culpa quam ex minus quos, impedit voluptate modi, nam, deleniti sint non.</p>
+        </div>    
+    </div>
+</nav>
+
+<!-- cards -->
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 ">
+            <div class="col-sm-7" *ngIf="!!allPersons">
+                <table class="table">
+                    <thead>
+                        <tr>
+                          
+                          <th scope="col">Name</th>
+                          <th scope="col">Address</th>
+                          <th scope="col">Phone Number</th>
+                          <th scope="col">Email</th>
+                          <th scope="col">Edit</th>
+                          <th scope="col">Delete</th>
+                          <th scope="col" >Qalification</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let person of allPersons">
+                         
+                          <td>{{person?.name}}</td>
+                          <td>{{person?.address}}</td>
+                          <td>{{person?.phoneNumber}}</td>
+                          <td>{{person?.email}}</td>
+                          <td *ngFor="let data of person?.educationaInfo"></td>
+                          <!-- <td >{{person?.educationalQualifications[0]?.from}}</td> -->
+                          <td><a class="btn btn-primary" [routerLink]="['/persons/edit', person.id]" >Edit</a></td>
+                          <td><span class="btn btn-danger" (click)="onDelete(person?.id)">Delete</span></td>
+                        </tr>
+                    </tbody>
+
+                </table>
+
+                <!-- <li class="list-group-item d-flex gap-3 " *ngFor="let person of allPersons">
+                    <span style="display:inline-block">{{person?.name}}</span>
+                    <span style="display:inline-block">{{person?.address}}</span>
+                    <span style="display:inline-block">{{person?.phoneNumber}}</span>
+                    <span style="display:inline-block">{{person?.email}}</span>
+                    <a class="btn btn-danger" [routerLink]="['/persons/edit', person.id]" >Edit</a>
+                    <span class="btn btn-danger" (click)="onDelete(person?.id)">Delete</span>
+                </li> -->
+                <!-- <ng-container *ngIf="!allPersons">
+                    <div>
+                        There is no persons data available
+                    </div>
+                </ng-container> -->
+                
+            </div>
+            
+            <!-- <div class="card list-group-item-danger">
+                <div class="card-body ">
+                    <div class="row">
+                        <div class="col-sm-4">
+                           
+                        </div>
+                        <div class="col-sm-7" *ngIf="!!allPersons">
+                            <li class="list-group-item d-flex gap-5 " *ngFor="let person of allPersons">
+                                <span style="display:inline-block">{{person?.name}}</span>
+                                <span style="display:inline-block">{{person?.address}}</span>
+                                <span style="display:inline-block">{{person?.phoneNumber}}</span>
+                                <span style="display:inline-block">{{person?.email}}</span>
+                            </li>
+                            
+                        </div>
+                        <ng-container *ngIf="!allPersons">
+                            <div>
+                                There is no persons data available
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+    </div>
+</div>
