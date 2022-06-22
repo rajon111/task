@@ -1,8 +1,8 @@
 export interface EduQualification{
     "id"?:string,
-    "from":string,
-    "to":string,
+    "from":Date,
+    "to":Date,
     "qualification":string,
     "institute":string,
-    "grade":string,
+    "grade":number,
 }

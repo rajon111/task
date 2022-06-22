@@ -29,6 +29,8 @@ export class EditPersonComponent implements OnInit {
 
   ngOnInit() {
     this.personServide.GetAllPersonData().subscribe(data => {
+      // console.log(data);
+      
       this.allPersons = data;
     });
     this.activeRoute.params.subscribe((params) => {
@@ -37,24 +39,25 @@ export class EditPersonComponent implements OnInit {
       this.person = this.allPersons.filter((data: Person) => data.id === this.id)[0];
     })
     this.myForm = this.createEditForm();
+    this.initTimes();
 
     this.fa.valueChanges.subscribe(value => {
-      console.log('name has changed:', value)
+      // console.log('name has changed:', value)
     });
   }
 
   createEditForm() {
     const form = this.fb.group({
-      id:[this.person?.id??''],
-      name: [this.person?.name ?? '', [
-        Validators.required,
-      ]],
-      // address: [
-      //   this.person?.address ?? '',
-      //   [
-      //     Validators.required
-      //   ]
-      // ],
+      id: [this.person?.id ?? ''],
+      name: [this.person?.name ?? '',
+      Validators.required,
+      ],
+      address: [
+        this.person?.address ?? '',
+
+        Validators.required
+
+      ],
       phoneNumber: [
         this.person?.phoneNumber ?? '',
         [
@@ -66,11 +69,11 @@ export class EditPersonComponent implements OnInit {
 
       email: [this.person?.email ?? '', [Validators.required, Validators.email]],
       educationaInfo: this.fb.array([
-        this.initTimes()
+        
       ])
     });
     // debugger
-    console.log(this.person);
+   
     return form;
 
   }
@@ -80,23 +83,51 @@ export class EditPersonComponent implements OnInit {
   }
   submitted = false;
   initTimes() {
+    // debugger
+    const arrayData =this.fa??this.fb.array([]);
+    this.person?.educationaInfo?.forEach((element: EduQualification) => {
+
+      arrayData.push(  this.fb.group({
+        from: element?.from,
+        to: element?.to,
+        qualification: element?.qualification,
+        institute: element?.institute,
+        grade: element?.grade,
+      })
+      );
+
+
+    });
+    return arrayData;
+    // return this.fb.group({
+    //   from: this.fb.control('', Validators.required),
+    //   to: this.fb.control('', Validators.required),
+    //   qualification: this.fb.control('', Validators.required),
+    //   institute: this.fb.control('', Validators.required),
+    //   grade: this.fb.control('', Validators.required),
+    // });
+  }
+  getValidity(i:number) {
+    return (<FormArray>this.myForm.get('educationaInfo')).controls[i].invalid;
+  }
+addformArray()
+{
     return this.fb.group({
       from: this.fb.control('', Validators.required),
-      to: this.fb.control('', Validators.required),
+      to: this.fb.control(''),
       qualification: this.fb.control('', Validators.required),
       institute: this.fb.control('', Validators.required),
       grade: this.fb.control('', Validators.required),
     });
-  }
-
+}
   generateUniqueId() {
     return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
   }
 
-  get fa() { return this.myForm.get('educationaInfo') as FormArray; }
+  get fa() { return this.myForm?.get('educationaInfo') as FormArray; }
 
   addGroup() {
-    this.fa.push(this.initTimes());
+    this.fa.push(this.addformArray());
   }
 
   removeGroup(i: number) {
@@ -104,20 +135,20 @@ export class EditPersonComponent implements OnInit {
   }
 
   onSubmit() {
-    debugger;
-    
+    // debugger;
+
     this.submitted = true;
 
     if (this.myForm.invalid) {
       return;
     }
     const data = { ...this.myForm.value }
-    console.log("data",data);
-    
-    data.id=this.id;
-    debugger;
-    console.log('value: ', this.myForm.value);
-    console.log('valid: ', this.myForm.valid);
+    // console.log("data", data);
+
+    data.id = this.id;
+    // debugger;
+    // console.log('value: ', this.myForm.value);
+    // console.log('valid: ', this.myForm.valid);
 
     this.personServide.editPerson(this.myForm.value);
     this.router.navigate(['/persons/admin']);

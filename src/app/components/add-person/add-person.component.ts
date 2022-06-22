@@ -142,7 +142,7 @@ export class AddPersonComponent implements OnInit {
         // Validators.minLength(6),
         // Validators.maxLength(20)
       ]],
-      id:[id],
+      id:[this.generateUniqueId()],
       address: ['', [
         Validators.required,
         // Validators.minLength(6),
@@ -164,7 +164,7 @@ export class AddPersonComponent implements OnInit {
       ])
     });
     this.fa.valueChanges.subscribe(value => {
-      console.log('name has changed:', value)
+      // console.log('name has changed:', value)
     });
   }
 
@@ -172,19 +172,22 @@ export class AddPersonComponent implements OnInit {
   initTimes() {
     return this.fb.group({
       from: this.fb.control('', Validators.required),
-      to: this.fb.control('', Validators.required),
+      to: this.fb.control(''),
       qualification: this.fb.control('', Validators.required),
       institute: this.fb.control('', Validators.required),
       grade: this.fb.control('', Validators.required),
     });
   }
 
-  // let dd = generateUniqueId() {
-  //   return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
-  // }
+
+  generateUniqueId() {
+    return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+  }
 
   get fa() { return this.myForm.get('educationaInfo') as FormArray; }
-
+  getValidity(i:number) {
+    return (<FormArray>this.myForm.get('educationaInfo')).controls[i].invalid;
+  }
   addGroup() {
     this.fa.push(this.initTimes());
   }
@@ -194,8 +197,8 @@ export class AddPersonComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('value: ', this.myForm.value);
-    console.log('valid: ', this.myForm.valid);
+    // console.log('value: ', this.myForm.value);
+    // console.log('valid: ', this.myForm.valid);
     this.submitted = true;
 
       if (this.myForm.invalid) {

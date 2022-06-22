@@ -1,93 +1,92 @@
-<nav class="container mt-3 ">
-    <div class="row">
-        <div class="col">
-            <p class="h3 text-danger fw-bold">Persons
-                <a class="btn btn-danger btn-sm" routerLink="/persons/add">add new</a>
-            </p>
-            <p>Wlecome to your TO-DO list. You can Store Your Needed Persons Recordes Accordingly.Also You can Update or delete Your Data .</p>
-        </div>    
-    </div>
-</nav>
-
-<!-- cards -->
-
-<div class="container">
-    <div class="row">
-        <div class="col-md-12 ">
-            <div class="col-sm-7" *ngIf="!!allPersons">
-                <table class="table">
-                    <thead>
-                        <tr>
-                          
-                          <th scope="col">Name</th>
-                          <th scope="col">Address</th>
-                          <th scope="col">Phone</th>
-                          <th scope="col">Email</th>
-                          <th scope="col">From</th>
-                          <th scope="col">To</th>
-                          <th scope="col" >Qalification</th>
-                          <th scope="col">Delete</th>
-                          <th scope="col">Edit</th>
-                          
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr *ngFor="let person of allPersons">
-                         
-                          <td>{{person?.name}}</td>
-                          <td>{{person?.address}}</td>
-                          <td>{{person?.phoneNumber}}</td>
-                          <td>{{person?.email}}</td>
-                          <td *ngFor="let data of person?.educationaInfo">{{data?.from? data?.from: ''}}</td>
-                          <td *ngFor="let data of person?.educationaInfo">{{data?.to}}</td>
-                          <td *ngFor="let data of person?.educationaInfo">{{data?.qualification}}</td>
-                          <!-- <td >{{person?.educationalQualifications[0]?.from}}</td> -->
-                          <td><a class="btn btn-primary" [routerLink]="['/persons/edit', person.id]" >Edit</a></td>
-                          <td><span class="btn btn-danger" (click)="onDelete(person?.id)">Delete</span></td>
-                        </tr>
-                    </tbody>
-
-                </table>
-
-                <!-- <li class="list-group-item d-flex gap-3 " *ngFor="let person of allPersons">
-                    <span style="display:inline-block">{{person?.name}}</span>
-                    <span style="display:inline-block">{{person?.address}}</span>
-                    <span style="display:inline-block">{{person?.phoneNumber}}</span>
-                    <span style="display:inline-block">{{person?.email}}</span>
-                    <a class="btn btn-danger" [routerLink]="['/persons/edit', person.id]" >Edit</a>
-                    <span class="btn btn-danger" (click)="onDelete(person?.id)">Delete</span>
-                </li> -->
-                <ng-container *ngIf="!allPersons">
-                    <div>
-                        There is no persons data available
-                    </div>
-                </ng-container>
-                
-            </div>
-            
-            <!-- <div class="card list-group-item-danger">
-                <div class="card-body ">
-                    <div class="row">
-                        <div class="col-sm-4">
-                           
+<div class="min-vh-100">
+    <nav class="container mt-3 ">
+        <div class="row">
+            <div class="col">
+                <p class="h3 text-danger fw-bold">Persons
+                    <a class="btn btn-primary btn-sm" routerLink="/persons/add">add new</a>
+                </p>
+                <p class="fst-italic shadow-sm mb-4">Wlecome to your TO-DO list. You can Store Your Needed Persons Recordes Accordingly.Also You can Update or delete Your Data .By keeping such a list, you make sure that your tasks are written down all in one place so you don't forget anything important. And by prioritizing tasks</p>
+            </div>    
+        </div>
+    </nav>
+    
+    <!-- cards -->
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 ">
+                <div class="col-sm-12" *ngIf="!!allPersons">
+                    <table class="table shadow-sm">
+                        <thead>
+                            <tr>
+                              
+                              <th scope="col">Name</th>
+                              <th scope="col">Address</th>
+                              <th scope="col">Phone</th>
+                              <th scope="col">Email</th>
+                              <th scope="col" >Qalification</th>
+                              <th scope="col" >Institute</th>
+                              <th scope="col" >Grade</th>
+                              <th scope="col">From</th>
+                              <th scope="col">To</th>
+                              
+                              <th scope="col">Delete</th>
+                              <th scope="col">Edit</th>
+                              
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let person of allPersons">                      
+                              <td>{{person?.name}}</td>
+                              <td>{{person?.address}}</td>
+                              <td>{{person?.phoneNumber}}</td>
+                              <td>{{person?.email}}</td>
+                              <td *ngFor="let data of person?.educationaInfo">{{data?.qualification}}</td>
+                              <td *ngFor="let data of person?.educationaInfo">{{data?.institute}}</td>
+                              <td *ngFor="let data of person?.educationaInfo">{{data?.grade}}</td>
+                              <td *ngFor="let data of person?.educationaInfo">{{data?.from? data?.from: ''}}</td>
+                              <td *ngFor="let data of person?.educationaInfo">{{data?.to}}</td>  
+                              <!-- <td >{{person?.educationalQualifications[0]?.from}}</td> -->
+                              <td><a class="btn btn-primary" [routerLink]="['/persons/edit', person.id]" >Edit</a></td>
+                              <td><span class="btn btn-danger" (click)="onDelete(person?.id)">Delete</span></td>
+                            </tr>
+                        </tbody>
+    
+                    </table>
+    
+                    <ng-container *ngIf="!allPersons">
+                        <div>
+                            There is no persons data available
                         </div>
-                        <div class="col-sm-7" *ngIf="!!allPersons">
-                            <li class="list-group-item d-flex gap-5 " *ngFor="let person of allPersons">
-                                <span style="display:inline-block">{{person?.name}}</span>
-                                <span style="display:inline-block">{{person?.address}}</span>
-                                <span style="display:inline-block">{{person?.phoneNumber}}</span>
-                                <span style="display:inline-block">{{person?.email}}</span>
-                            </li>
-                            
-                        </div>
-                        <ng-container *ngIf="!allPersons">
-                            <div>
-                                There is no persons data available
-                            </div>
-                        </ng-container>
-                    </div>
+                    </ng-container>
+                    
                 </div>
-            </div> -->
+                
+                <!-- <div class="card list-group-item-danger">
+                    <div class="card-body ">
+                        <div class="row">
+                            <div class="col-sm-4">
+                               
+                            </div>
+                            <div class="col-sm-7" *ngIf="!!allPersons">
+                                <li class="list-group-item d-flex gap-5 " *ngFor="let person of allPersons">
+                                    <span style="display:inline-block">{{person?.name}}</span>
+                                    <span style="display:inline-block">{{person?.address}}</span>
+                                    <span style="display:inline-block">{{person?.phoneNumber}}</span>
+                                    <span style="display:inline-block">{{person?.email}}</span>
+                                </li>
+                                
+                            </div>
+                            <ng-container *ngIf="!allPersons">
+                                <div>
+                                    There is no persons data available
+                                </div>
+                            </ng-container>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
         </div>
     </div>
+    
 </div>
